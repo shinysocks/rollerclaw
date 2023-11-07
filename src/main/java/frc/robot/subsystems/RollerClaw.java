@@ -6,14 +6,17 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
+import com.revrobotics.CANSparkMax;
 
 public class RollerClaw extends SubsystemBase {
+  CANSparkMax leftmotorwheel = new CANSparkMax(Constants.LEFTROLLERWHEELID, CANSparkMax.MotorType.kBrushless);
+  CANSparkMax rightmotorwheel = new CANSparkMax(Constants.RIGHTROLLERWHEELID, CANSparkMax.MotorType.kBrushless);
 
-
-  double speed;
   /** Creates a new ExampleSubsystem. */
   public RollerClaw() {
-    
+
   }
 
   /**
@@ -24,6 +27,10 @@ public class RollerClaw extends SubsystemBase {
   public CommandBase exampleMethodCommand() {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
+
+    leftmotorwheel.set(speed);
+    rightmotorwheel.set(-speed);
+
     return runOnce(
         () -> {
           /* one-time action goes here */
@@ -31,7 +38,8 @@ public class RollerClaw extends SubsystemBase {
   }
 
   /**
-   * An example method querying a boolean state of the subsystem (for example, a digital sensor).
+   * An example method querying a boolean state of the subsystem (for example, a
+   * digital sensor).
    *
    * @return value of some boolean subsystem state, such as a digital sensor.
    */

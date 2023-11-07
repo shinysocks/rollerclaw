@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.RollerClaw;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class OperateRoller extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final RollerClaw m_subsystem;
+  double speed;
 
   /**
    * Creates a new ExampleCommand.
@@ -23,13 +25,27 @@ public class OperateRoller extends CommandBase {
     addRequirements(subsystem);
   }
 
+  private double getMotorSpeed() {
+    double axis = joystick.getRawAxis(Constants.RIGHTSTICKYAXIS);
+    if (Math.abs(axis) > Constants.DEADZONE) {
+      // power function
+      return Constants.SPEEDMODIFIER * Math.pow(axis, 3);
+    }
+    return 0.0;
+  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    speed = getMotorSpeed();
+    
+
+    System.out.println(speed);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
