@@ -6,49 +6,47 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.RollerClaw;
-import edu.wpi.first.wpilibj.Joystick;
+
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/** An example command that uses an example subsystem. */
 public class OperateRoller extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final RollerClaw m_subsystem;
-  private Joystick m_joystick;
+    private final RollerClaw subsystem;
+    private final DoubleSupplier axi;
 
-  public OperateRoller(RollerClaw subsystem, Joystick joystick) {
-    m_subsystem = subsystem;
-    m_joystick = joystick;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
-  }
-
-  private double getMotorSpeed() {
-    double axis = m_joystick.getRawAxis(Constants.RIGHTSTICKYAXIS);
-    if (Math.abs(axis) > Constants.DEADZONE) {
-      // power function
-      return Constants.SPEEDMODIFIER * Math.pow(axis, 3);
+    public OperateRoller(RollerClaw subsystem, DoubleSupplier axi) {
+        this.subsystem = subsystem;
+        this.axi = axi;
+        addRequirements(subsystem);
     }
-    return 0.0;
-  }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
+    private double getMotorSpeed() {
+        if (Math.abs(axi.getAsDouble()) > Constants.DEADZONE) {
+            // power function
+            return Constants.SPEEDMODIFIER * Math.pow(axi.getAsDouble(), 3);
+        }
+        return 0.0;
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    m_subsystem.setSpeed(getMotorSpeed());
-    System.out.println(getMotorSpeed());
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        subsystem.setSpeed(getMotorSpeed());
+        System.out.println(getMotorSpeed());
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {}
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

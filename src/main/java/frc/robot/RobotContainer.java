@@ -18,44 +18,36 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final RollerClaw rollerClaw = new RollerClaw();
-  Joystick joystick;
+	// The robot's subsystems and commands are defined here...
+	private final RollerClaw rollerClaw = new RollerClaw();
+	Joystick joystick;
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
+	// Replace with CommandPS4Controller or CommandJoystick if needed
 
-  //Joystick joystick = new Joystick(0);
-  //private final CommandXboxController m_driverController =
-  //    new CommandXboxController(OperatorConstants.kDriverControllerPort);
+	//Joystick joystick = new Joystick(0);
+	//private final CommandXboxController m_driverController =
+	//    new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
-    // Configure the trigger bindings
-    configureBindings();
-  }
+	/** The container for the robot. Contains subsystems, OI devices, and commands. */
+	public RobotContainer() {
+		// Configure the trigger bindings
+		configureBindings();
+	}
 
-  private void configureBindings() {
-    try {
-      joystick = new Joystick(Constants.kDriverControllerPort);
-    } catch (Exception e) {
-      System.out.println(e);
-    }
+	private void configureBindings() {
+		joystick = new Joystick(Constants.kDriverControllerPort);
 
-    JoystickButton xButton = new JoystickButton(joystick, 0);
-    xButton.toggleOnTrue(new OperateRoller(rollerClaw, joystick));
-    
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    // m_driverController.b().whileTrue(rollerClaw.exampleMethodCommand());
-  }
+		JoystickButton xButton = new JoystickButton(joystick, 0);
+		xButton.toggleOnTrue(new OperateRoller(rollerClaw, () -> joystick.getRawAxis(Constants.RIGHTSTICKYAXIS)));
+	}
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Commands.none();
-  }
+	/**
+	 * Use this to pass the autonomous command to the main {@link Robot} class.
+	 *
+	 * @return the command to run in autonomous
+	 */
+	public Command getAutonomousCommand() {
+		// An example command will be run in autonomous
+		return Commands.none();
+	}
 }
