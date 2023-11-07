@@ -15,16 +15,14 @@ public class RollerClaw extends SubsystemBase {
   CANSparkMax rightmotorwheel = new CANSparkMax(Constants.RIGHTROLLERWHEELID, CANSparkMax.MotorType.kBrushless);
 
   /** Creates a new ExampleSubsystem. */
-  public RollerClaw() {
-
-  }
+  public RollerClaw() {}
 
   /**
    * Example command factory method.
    *
    * @return a command
    */
-  public CommandBase exampleMethodCommand() {
+  public CommandBase setSpeed(double speed) {
     // Inline construction of command goes here.
     // Subsystem::RunOnce implicitly requires `this` subsystem.
 
@@ -32,9 +30,9 @@ public class RollerClaw extends SubsystemBase {
     rightmotorwheel.set(-speed);
 
     return runOnce(
-        () -> {
-          /* one-time action goes here */
-        });
+      () -> {
+        /* one-time action goes here */
+      });
   }
 
   /**

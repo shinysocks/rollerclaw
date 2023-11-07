@@ -6,27 +6,24 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.RollerClaw;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class OperateRoller extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final RollerClaw m_subsystem;
-  double speed;
+  private Joystick m_joystick;
 
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-  public OperateRoller(RollerClaw subsystem) {
+  public OperateRoller(RollerClaw subsystem, Joystick joystick) {
     m_subsystem = subsystem;
+    m_joystick = joystick;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
 
   private double getMotorSpeed() {
-    double axis = joystick.getRawAxis(Constants.RIGHTSTICKYAXIS);
+    double axis = m_joystick.getRawAxis(Constants.RIGHTSTICKYAXIS);
     if (Math.abs(axis) > Constants.DEADZONE) {
       // power function
       return Constants.SPEEDMODIFIER * Math.pow(axis, 3);
@@ -41,10 +38,8 @@ public class OperateRoller extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    speed = getMotorSpeed();
-    
-
-    System.out.println(speed);
+    m_subsystem.setSpeed(getMotorSpeed());
+    System.out.println(getMotorSpeed());
   }
 
   // Called once the command ends or is interrupted.

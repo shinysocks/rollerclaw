@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final RollerClaw rollerClaw = new RollerClaw();
+  Joystick joystick;
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -34,9 +35,14 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    Joystick joystick = new Joystick(Constants.kDriverControllerPort);
+    try {
+      joystick = new Joystick(Constants.kDriverControllerPort);
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+
     JoystickButton xButton = new JoystickButton(joystick, 0);
-    xButton.toggleOnTrue(new OperateRoller(rollerClaw));
+    xButton.toggleOnTrue(new OperateRoller(rollerClaw, joystick));
     
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
