@@ -6,9 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.RollerClaw;
-
 import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class OperateRoller extends CommandBase {
@@ -16,6 +14,7 @@ public class OperateRoller extends CommandBase {
     private final DoubleSupplier axi;
 
     public OperateRoller(RollerClaw subsystem, DoubleSupplier axi) {
+        System.out.println("hello");
         this.subsystem = subsystem;
         this.axi = axi;
         addRequirements(subsystem);

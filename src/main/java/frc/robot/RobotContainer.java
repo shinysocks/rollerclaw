@@ -37,7 +37,7 @@ public class RobotContainer {
 	private void configureBindings() {
 		joystick = new Joystick(Constants.kDriverControllerPort);
 
-		JoystickButton xButton = new JoystickButton(joystick, 0);
+		JoystickButton xButton = new JoystickButton(joystick, Constants.CONTROLLERXBUTTON);
 		xButton.toggleOnTrue(new OperateRoller(rollerClaw, () -> joystick.getRawAxis(Constants.RIGHTSTICKYAXIS)));
 	}
 
