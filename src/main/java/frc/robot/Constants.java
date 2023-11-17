@@ -6,8 +6,7 @@ package frc.robot;
 
 public final class Constants {
     public static final int kDriverControllerPort = 0;
-    public static final int LEFTROLLERWHEELID = 1;
-    public static final int RIGHTROLLERWHEELID = 2;
+    public static final int ROLLERWHEELID = 1;
     public static final int CONTROLLERXBUTTON = 3;
     public static final double SPEEDMODIFIER = .5;
     public static final double DEADZONE = .1;

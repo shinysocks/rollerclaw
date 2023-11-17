@@ -10,15 +10,13 @@ import frc.robot.Constants;
 import com.revrobotics.CANSparkMax;
 
 public class RollerClaw extends SubsystemBase {
-    CANSparkMax leftmotorwheel = new CANSparkMax(Constants.LEFTROLLERWHEELID, CANSparkMax.MotorType.kBrushless);
-    CANSparkMax rightmotorwheel = new CANSparkMax(Constants.RIGHTROLLERWHEELID, CANSparkMax.MotorType.kBrushless);
+    CANSparkMax rollermotor = new CANSparkMax(Constants.ROLLERWHEELID, CANSparkMax.MotorType.kBrushless);
 
     /** Creates a new ExampleSubsystem. */
     public RollerClaw() {}
 
     public void setSpeed(double speed) {
-        leftmotorwheel.set(speed);
-        rightmotorwheel.set(-speed);
+        rollermotor.set(speed);
     }
 
     /**
