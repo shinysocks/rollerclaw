@@ -20,7 +20,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
 	// The robot's subsystems and commands are defined here...
 	private final RollerClaw rollerClaw = new RollerClaw();
-	Joystick joystick;
+    Joystick joystick = new Joystick(Constants.kDriverControllerPort);
+    JoystickButton xButton = new JoystickButton(joystick, Constants.CONTROLLERXBUTTON);
 
 	// Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -35,9 +36,6 @@ public class RobotContainer {
 	}
 
 	private void configureBindings() {
-		joystick = new Joystick(Constants.kDriverControllerPort);
-
-		JoystickButton xButton = new JoystickButton(joystick, Constants.CONTROLLERXBUTTON);
 		xButton.toggleOnTrue(new OperateRoller(rollerClaw, () -> joystick.getRawAxis(Constants.RIGHTSTICKYAXIS)));
 	}
 
