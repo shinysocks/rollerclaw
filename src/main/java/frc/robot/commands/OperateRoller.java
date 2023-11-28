@@ -14,7 +14,6 @@ public class OperateRoller extends CommandBase {
     private final DoubleSupplier axi;
 
     public OperateRoller(RollerClaw subsystem, DoubleSupplier axi) {
-        System.out.println("hello");
         this.subsystem = subsystem;
         this.axi = axi;
         addRequirements(subsystem);

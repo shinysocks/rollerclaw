@@ -7,8 +7,6 @@ package frc.robot;
 import frc.robot.commands.OperateRoller;
 import frc.robot.subsystems.RollerClaw;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -37,15 +35,5 @@ public class RobotContainer {
 
 	private void configureBindings() {
 		xButton.toggleOnTrue(new OperateRoller(rollerClaw, () -> joystick.getRawAxis(Constants.RIGHTSTICKYAXIS)));
-	}
-
-	/**
-	 * Use this to pass the autonomous command to the main {@link Robot} class.
-	 *
-	 * @return the command to run in autonomous
-	 */
-	public Command getAutonomousCommand() {
-		// An example command will be run in autonomous
-		return Commands.none();
 	}
 }

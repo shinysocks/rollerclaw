@@ -12,23 +12,8 @@ import com.revrobotics.CANSparkMax;
 public class RollerClaw extends SubsystemBase {
     CANSparkMax rollermotor = new CANSparkMax(Constants.ROLLERWHEELID, CANSparkMax.MotorType.kBrushless);
 
-    /** Creates a new ExampleSubsystem. */
-    public RollerClaw() {}
-
     public void setSpeed(double speed) {
         rollermotor.set(speed);
-    }
-
-    /**
-     * An example method querying a boolean state of the subsystem (for example, a
-     * digital sensor).
-     *
-     * @return value of some boolean subsystem state, such as a digital sensor.
-     */
-
-    public boolean exampleCondition() {
-        // Query some boolean state, such as a digital sensor.
-        return false;
     }
 
     @Override
