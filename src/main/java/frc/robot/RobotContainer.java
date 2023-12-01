@@ -29,11 +29,6 @@ public class RobotContainer {
 
 	/** The container for the robot. Contains subsystems, OI devices, and commands. */
 	public RobotContainer() {
-		// Configure the trigger bindings
-		configureBindings();
-	}
-
-	private void configureBindings() {
-		xButton.toggleOnTrue(new OperateRoller(rollerClaw, () -> joystick.getRawAxis(Constants.RIGHTSTICKYAXIS)));
+        xButton.toggleOnTrue(new OperateRoller(rollerClaw, () -> joystick.getRawAxis(Constants.RIGHTSTICKYAXIS)));
 	}
 }
