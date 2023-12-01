@@ -12,6 +12,10 @@ import com.revrobotics.CANSparkMax;
 public class RollerClaw extends SubsystemBase {
     CANSparkMax rollermotor = new CANSparkMax(Constants.ROLLERWHEELID, CANSparkMax.MotorType.kBrushless);
 
+    public RollerClaw() {
+        rollermotor.setSmartCurrentLimit(Constants.CURRENTLIMIT);
+    }
+
     public void setSpeed(double speed) {
         rollermotor.set(speed);
     }
